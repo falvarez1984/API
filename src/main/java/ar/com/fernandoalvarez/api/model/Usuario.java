@@ -61,6 +61,7 @@ public class Usuario implements Serializable {
     private Date fechaNacimiento;
 
     @NotNull
+    @Temporal(TemporalType.DATE)
     @Column(name = "FECHA_INSCRIPCION")
     private Date fechaInscripcion;
 
