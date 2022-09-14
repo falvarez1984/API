@@ -3,7 +3,10 @@ package ar.com.fernandoalvarez.api.controllerimpl;
 import ar.com.fernandoalvarez.api.controller.UsuarioController;
 import ar.com.fernandoalvarez.api.dto.response.UsuarioResponseDto;
 import ar.com.fernandoalvarez.api.service.UsuarioService;
+import ar.com.fernandoalvarez.api.specification.UsuarioSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +22,16 @@ public class UsuarioControllerImpl implements UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Override
     @GetMapping("/obtenerTodos")
     public ResponseEntity<List<UsuarioResponseDto>> obtenerTodos() {
         return new ResponseEntity<List<UsuarioResponseDto>>(this.usuarioService.obtenerTodos(), HttpStatus.OK);
+    }
+
+    @Override
+    @GetMapping("/paginado")
+    public Page<UsuarioResponseDto> obtenerTodos(UsuarioSpecification spec, Pageable pag) {
+        return this.usuarioService.obtenerTodos(spec, pag);
     }
 
 }

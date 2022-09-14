@@ -31,6 +31,10 @@ public class Usuario implements Serializable {
     private String apellido;
 
     @NotNull
+    @Column(name = "DNI")
+    private Integer dni;
+
+    @NotNull
     @Column(name = "EDAD")
     private Integer edad;
 
