@@ -20,9 +20,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public List<UsuarioResponseDto> obtenerTodos() {
+    public List<UsuarioResponseDto> obtenerTodosDto() {
         List<Usuario> usuarios = this.usuarioRepository.findAll();
         return Mapper.mapAll(usuarios, UsuarioResponseDto.class);
+    }
+
+    @Override
+    public List<Usuario> obtenerTodos() {
+        List<Usuario> usuarios = this.usuarioRepository.findAll();
+        return usuarios;
     }
 
     @Override

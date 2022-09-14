@@ -10,7 +10,9 @@ import java.util.List;
 
 public interface UsuarioService {
 
-    public List<UsuarioResponseDto> obtenerTodos();
+    public List<UsuarioResponseDto> obtenerTodosDto();
+
+    public List<Usuario> obtenerTodos();
 
     Page<UsuarioResponseDto> obtenerTodos(Specification<Usuario> spec, Pageable pag);
 
