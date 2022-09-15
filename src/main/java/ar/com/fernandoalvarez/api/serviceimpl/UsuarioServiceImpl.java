@@ -1,8 +1,11 @@
 package ar.com.fernandoalvarez.api.serviceimpl;
 
+import ar.com.fernandoalvarez.api.dto.request.UsuarioRequestDto;
 import ar.com.fernandoalvarez.api.dto.response.UsuarioResponseDto;
+import ar.com.fernandoalvarez.api.exception.ResourceBadRequestException;
 import ar.com.fernandoalvarez.api.exception.ResourceNotFoundException;
 import ar.com.fernandoalvarez.api.helpers.Mapper;
+import ar.com.fernandoalvarez.api.helpers.Message;
 import ar.com.fernandoalvarez.api.model.Usuario;
 import ar.com.fernandoalvarez.api.repository.UsuarioRepository;
 import ar.com.fernandoalvarez.api.service.UsuarioService;
@@ -44,6 +47,13 @@ public class UsuarioServiceImpl implements UsuarioService {
         if(usuario.isEmpty())
             throw new ResourceNotFoundException("El plan con ID = " + id + " no existe.");
         return Mapper.map(usuario, UsuarioResponseDto.class);
+    }
+
+    @Override
+    public Message nuevo(UsuarioRequestDto usuarioRequestDto) {
+        Usuario usuario = Mapper.map(usuarioRequestDto, Usuario.class);
+        usuarioRepository.save(usuario);
+        return new Message("El usuario se creó correctamente");
     }
 
 }

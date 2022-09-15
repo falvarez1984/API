@@ -1,6 +1,8 @@
 package ar.com.fernandoalvarez.api.service;
 
+import ar.com.fernandoalvarez.api.dto.request.UsuarioRequestDto;
 import ar.com.fernandoalvarez.api.dto.response.UsuarioResponseDto;
+import ar.com.fernandoalvarez.api.helpers.Message;
 import ar.com.fernandoalvarez.api.model.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,8 +16,10 @@ public interface UsuarioService {
 
     public List<Usuario> obtenerTodos();
 
-    Page<UsuarioResponseDto> obtenerTodos(Specification<Usuario> spec, Pageable pag);
+    public Page<UsuarioResponseDto> obtenerTodos(Specification<Usuario> spec, Pageable pag);
 
-    UsuarioResponseDto obtenerPorId(Long id);
+    public UsuarioResponseDto obtenerPorId(Long id);
+
+    public Message nuevo(UsuarioRequestDto usuario);
 
 }

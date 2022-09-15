@@ -1,7 +1,9 @@
 package ar.com.fernandoalvarez.api.controller;
 
+import ar.com.fernandoalvarez.api.dto.request.UsuarioRequestDto;
 import ar.com.fernandoalvarez.api.dto.response.UsuarioResponseDto;
 import ar.com.fernandoalvarez.api.exception.ErrorDetails;
+import ar.com.fernandoalvarez.api.helpers.Message;
 import ar.com.fernandoalvarez.api.model.Usuario;
 import ar.com.fernandoalvarez.api.specification.UsuarioSpecification;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,7 +21,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Tag(name = "Usuarios", description = "CRUD de usuarios")
@@ -66,5 +70,12 @@ public interface UsuarioController {
             @ApiResponse(responseCode = "500", description = "Error interno al procesar la respuesta", content = @Content(schema = @Schema(implementation = ErrorDetails.class)))})
     @Operation(summary = "Obtener un usuario por id.")
     public ResponseEntity<UsuarioResponseDto> obtenerPorId(@PathVariable Long id);
+
+    @Operation(summary = "Generar nuevo usuario.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "El nuevo usuario fue creado correctamente", content = @Content(schema = @Schema(implementation = Message.class))),
+            @ApiResponse(responseCode = "400", description = "La petición es inválida", content = @Content(schema = @Schema(implementation = ErrorDetails.class))),
+            @ApiResponse(responseCode = "500", description = "Error interno al procesar la respuesta", content = @Content(schema = @Schema(implementation = ErrorDetails.class)))})
+    public ResponseEntity<Message> nuevoUsuario(@Valid @RequestBody UsuarioRequestDto usuarioRequestDto);
 
 }

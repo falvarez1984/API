@@ -1,7 +1,9 @@
 package ar.com.fernandoalvarez.api.controllerimpl;
 
 import ar.com.fernandoalvarez.api.controller.UsuarioController;
+import ar.com.fernandoalvarez.api.dto.request.UsuarioRequestDto;
 import ar.com.fernandoalvarez.api.dto.response.UsuarioResponseDto;
+import ar.com.fernandoalvarez.api.helpers.Message;
 import ar.com.fernandoalvarez.api.model.Usuario;
 import ar.com.fernandoalvarez.api.service.UsuarioService;
 import ar.com.fernandoalvarez.api.specification.UsuarioSpecification;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,6 +48,12 @@ public class UsuarioControllerImpl implements UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioResponseDto> obtenerPorId(Long id) {
         return new ResponseEntity<UsuarioResponseDto>(this.usuarioService.obtenerPorId(id), HttpStatus.OK);
+    }
+
+    @Override
+    @PostMapping("/nuevo")
+    public ResponseEntity<Message> nuevoUsuario(UsuarioRequestDto usuarioRequestDto) {
+        return new ResponseEntity<Message>(this.usuarioService.nuevo(usuarioRequestDto), HttpStatus.OK);
     }
 
 }
