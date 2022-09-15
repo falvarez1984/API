@@ -1,8 +1,8 @@
 package ar.com.fernandoalvarez.api.serviceimpl;
 
+import ar.com.fernandoalvarez.api.dto.request.UsuarioModificarRequestDto;
 import ar.com.fernandoalvarez.api.dto.request.UsuarioRequestDto;
 import ar.com.fernandoalvarez.api.dto.response.UsuarioResponseDto;
-import ar.com.fernandoalvarez.api.exception.ResourceBadRequestException;
 import ar.com.fernandoalvarez.api.exception.ResourceNotFoundException;
 import ar.com.fernandoalvarez.api.helpers.Mapper;
 import ar.com.fernandoalvarez.api.helpers.Message;
@@ -44,7 +44,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioResponseDto obtenerPorId(Long id) {
         Optional<Usuario> usuario = this.usuarioRepository.findById(id);
-        if(usuario.isEmpty())
+        if (usuario.isEmpty())
             throw new ResourceNotFoundException("El plan con ID = " + id + " no existe.");
         return Mapper.map(usuario, UsuarioResponseDto.class);
     }
@@ -54,6 +54,34 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuario = Mapper.map(usuarioRequestDto, Usuario.class);
         usuarioRepository.save(usuario);
         return new Message("El usuario se creó correctamente");
+    }
+
+    @Override
+    public Usuario modificarUsuario(Long id, UsuarioModificarRequestDto usuarioModificarRequestDto) {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El plan con ID = " + id + " no existe."));
+        if (usuarioModificarRequestDto.getTelefono() != null)
+            usuario.setTelefono(usuarioModificarRequestDto.getTelefono());
+        if (usuarioModificarRequestDto.getMail() != null)
+            usuario.setMail(usuarioModificarRequestDto.getMail());
+        if (usuarioModificarRequestDto.getDireccion() != null)
+            usuario.setDireccion(usuarioModificarRequestDto.getDireccion());
+        if (usuarioModificarRequestDto.getPais() != null)
+            usuario.setPais(usuarioModificarRequestDto.getPais());
+        if (usuarioModificarRequestDto.getProvincia() != null)
+            usuario.setProvincia(usuarioModificarRequestDto.getProvincia());
+        if (usuarioModificarRequestDto.getLocalidad() != null)
+            usuario.setLocalidad(usuarioModificarRequestDto.getLocalidad());
+        return Mapper.map(usuarioRepository.save(usuario), Usuario.class);
+    }
+
+    @Override
+    public Message eliminarUsuario(Long id) {
+
+        Optional<Usuario> usuario = this.usuarioRepository.findById(id);
+        if (usuario.isEmpty())
+            throw new ResourceNotFoundException("El usuario con ID = " + id + " no existe.");
+        this.usuarioRepository.delete(usuario.get());
+        return new Message("El usuario fue eliminado satisfactoriamente");
     }
 
 }

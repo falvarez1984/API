@@ -22,31 +22,24 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Column(name = "NOMBRE")
     private String nombre;
 
-    @NotNull
     @Column(name = "APELLIDO")
     private String apellido;
 
-    @NotNull
     @Column(name = "DNI")
     private Integer dni;
 
-    @NotNull
     @Column(name = "EDAD")
     private Integer edad;
 
-    @NotNull
     @Column(name = "TELEFONO")
     private Integer telefono;
 
-    @NotNull
     @Column(name = "MAIL")
     private String mail;
 
-    @NotNull
     @Column(name = "DIRECCION")
     private String direccion;
 
@@ -56,7 +49,6 @@ public class Usuario implements Serializable {
     @Column(name = "PROVINCIA")
     private String provincia;
 
-    @NotNull
     @Column(name = "LOCALIDAD")
     private String localidad;
 
@@ -64,7 +56,6 @@ public class Usuario implements Serializable {
     @Column(name = "FECHA_NACIMIENTO")
     private Date fechaNacimiento;
 
-    @NotNull
     @Temporal(TemporalType.DATE)
     @Column(name = "FECHA_INSCRIPCION")
     private Date fechaInscripcion;

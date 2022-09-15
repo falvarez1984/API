@@ -1,6 +1,7 @@
 package ar.com.fernandoalvarez.api.controllerimpl;
 
 import ar.com.fernandoalvarez.api.controller.UsuarioController;
+import ar.com.fernandoalvarez.api.dto.request.UsuarioModificarRequestDto;
 import ar.com.fernandoalvarez.api.dto.request.UsuarioRequestDto;
 import ar.com.fernandoalvarez.api.dto.response.UsuarioResponseDto;
 import ar.com.fernandoalvarez.api.helpers.Message;
@@ -12,10 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -54,6 +52,19 @@ public class UsuarioControllerImpl implements UsuarioController {
     @PostMapping("/nuevo")
     public ResponseEntity<Message> nuevoUsuario(UsuarioRequestDto usuarioRequestDto) {
         return new ResponseEntity<Message>(this.usuarioService.nuevo(usuarioRequestDto), HttpStatus.OK);
+    }
+
+    @Override
+    @PutMapping("/modificar/{id}")
+    public ResponseEntity<Usuario> modificarUsuario(Long id, @RequestBody UsuarioModificarRequestDto usuarioModificarRequestDto) {
+        return new ResponseEntity<Usuario>(
+                this.usuarioService.modificarUsuario(id, usuarioModificarRequestDto), HttpStatus.OK);
+    }
+
+    @Override
+    @DeleteMapping("/borrar/{id}")
+    public ResponseEntity<Message> eliminarUsuario(Long id) {
+        return new ResponseEntity<Message>(this.usuarioService.eliminarUsuario(id), HttpStatus.OK);
     }
 
 }

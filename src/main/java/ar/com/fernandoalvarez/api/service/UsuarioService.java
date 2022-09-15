@@ -1,5 +1,6 @@
 package ar.com.fernandoalvarez.api.service;
 
+import ar.com.fernandoalvarez.api.dto.request.UsuarioModificarRequestDto;
 import ar.com.fernandoalvarez.api.dto.request.UsuarioRequestDto;
 import ar.com.fernandoalvarez.api.dto.response.UsuarioResponseDto;
 import ar.com.fernandoalvarez.api.helpers.Message;
@@ -20,6 +21,10 @@ public interface UsuarioService {
 
     public UsuarioResponseDto obtenerPorId(Long id);
 
-    public Message nuevo(UsuarioRequestDto usuario);
+    public Message nuevo(UsuarioRequestDto usuarioRequestDto);
+
+    public Usuario modificarUsuario(Long id, UsuarioModificarRequestDto usuarioModificarRequestDto);
+
+    public Message eliminarUsuario(Long id);
 
 }

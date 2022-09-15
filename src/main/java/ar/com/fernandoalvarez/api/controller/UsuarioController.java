@@ -1,5 +1,6 @@
 package ar.com.fernandoalvarez.api.controller;
 
+import ar.com.fernandoalvarez.api.dto.request.UsuarioModificarRequestDto;
 import ar.com.fernandoalvarez.api.dto.request.UsuarioRequestDto;
 import ar.com.fernandoalvarez.api.dto.response.UsuarioResponseDto;
 import ar.com.fernandoalvarez.api.exception.ErrorDetails;
@@ -77,5 +78,21 @@ public interface UsuarioController {
             @ApiResponse(responseCode = "400", description = "La petición es inválida", content = @Content(schema = @Schema(implementation = ErrorDetails.class))),
             @ApiResponse(responseCode = "500", description = "Error interno al procesar la respuesta", content = @Content(schema = @Schema(implementation = ErrorDetails.class)))})
     public ResponseEntity<Message> nuevoUsuario(@Valid @RequestBody UsuarioRequestDto usuarioRequestDto);
+
+    @Operation(summary = "Modificar un usuario.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "El usuario fue modificado correctamente", content = @Content(schema = @Schema(implementation = Usuario.class))),
+            @ApiResponse(responseCode = "400", description = "La petición es inválida", content = @Content(schema = @Schema(implementation = ErrorDetails.class))),
+            @ApiResponse(responseCode = "404", description = "El usuario no existe", content = @Content(schema = @Schema(implementation = ErrorDetails.class))),
+            @ApiResponse(responseCode = "500", description = "Error interno al procesar la respuesta", content = @Content(schema = @Schema(implementation = ErrorDetails.class))) })
+    public ResponseEntity<Usuario> modificarUsuario(@PathVariable Long id, @RequestBody UsuarioModificarRequestDto usuarioModificarRequestDto);
+
+    @Operation(summary = "Eliminar un usuario.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "El usuario fue eliminado correctamente", content = @Content(schema = @Schema(implementation = Message.class))),
+            @ApiResponse(responseCode = "400", description = "La petición es inválida", content = @Content(schema = @Schema(implementation = ErrorDetails.class))),
+            @ApiResponse(responseCode = "404", description = "El usuario no existe", content = @Content(schema = @Schema(implementation = ErrorDetails.class))),
+            @ApiResponse(responseCode = "500", description = "Error interno al procesar la respuesta", content = @Content(schema = @Schema(implementation = ErrorDetails.class))) })
+    public ResponseEntity<Message> eliminarUsuario(@PathVariable Long id);
 
 }
