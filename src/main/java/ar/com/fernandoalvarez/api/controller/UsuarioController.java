@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -58,5 +59,12 @@ public interface UsuarioController {
     public Page<UsuarioResponseDto> obtenerTodos(UsuarioSpecification spec,
                                                  @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable);
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "El usuario fue consultado correctamente", content = @Content(schema = @Schema(implementation = UsuarioResponseDto.class))),
+            @ApiResponse(responseCode = "400", description = "La petición es inválida", content = @Content(schema = @Schema(implementation = ErrorDetails.class))),
+            @ApiResponse(responseCode = "404", description = "El usuario con el ID no existe", content = @Content(schema = @Schema(implementation = ErrorDetails.class))),
+            @ApiResponse(responseCode = "500", description = "Error interno al procesar la respuesta", content = @Content(schema = @Schema(implementation = ErrorDetails.class)))})
+    @Operation(summary = "Obtener un usuario por id.")
+    public ResponseEntity<UsuarioResponseDto> obtenerPorId(@PathVariable Long id);
 
 }

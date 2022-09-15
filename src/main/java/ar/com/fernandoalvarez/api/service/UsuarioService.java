@@ -16,4 +16,6 @@ public interface UsuarioService {
 
     Page<UsuarioResponseDto> obtenerTodos(Specification<Usuario> spec, Pageable pag);
 
+    UsuarioResponseDto obtenerPorId(Long id);
+
 }

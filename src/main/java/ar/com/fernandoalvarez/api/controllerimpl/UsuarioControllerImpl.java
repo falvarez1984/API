@@ -41,4 +41,10 @@ public class UsuarioControllerImpl implements UsuarioController {
         return this.usuarioService.obtenerTodos(spec, pag);
     }
 
+    @Override
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioResponseDto> obtenerPorId(Long id) {
+        return new ResponseEntity<UsuarioResponseDto>(this.usuarioService.obtenerPorId(id), HttpStatus.OK);
+    }
+
 }
