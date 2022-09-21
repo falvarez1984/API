@@ -4,6 +4,7 @@ import ar.com.fernandoalvarez.api.dto.request.UsuarioModificarRequestDto;
 import ar.com.fernandoalvarez.api.dto.request.UsuarioRequestDto;
 import ar.com.fernandoalvarez.api.dto.response.UsuarioResponseDto;
 import ar.com.fernandoalvarez.api.exception.ResourceNotFoundException;
+import ar.com.fernandoalvarez.api.helpers.ExcelHelper;
 import ar.com.fernandoalvarez.api.helpers.Mapper;
 import ar.com.fernandoalvarez.api.helpers.Message;
 import ar.com.fernandoalvarez.api.model.Usuario;
@@ -15,6 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,6 +85,20 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new ResourceNotFoundException("El usuario con ID = " + id + " no existe.");
         this.usuarioRepository.delete(usuario.get());
         return new Message("El usuario fue eliminado satisfactoriamente");
+    }
+
+    @Override
+    public InputStream findUsuarios(Integer dni) {
+
+        List<Usuario> usuarios = null;
+        if (dni == null) {
+            usuarios = this.usuarioRepository.findAll();
+        }else{
+            usuarios = this.usuarioRepository.findByDni(dni);
+        }
+        ByteArrayInputStream in = ExcelHelper.exportarUsuarios(usuarios);
+        return in;
+
     }
 
 }

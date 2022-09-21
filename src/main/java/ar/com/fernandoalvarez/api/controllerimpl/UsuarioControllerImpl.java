@@ -9,9 +9,13 @@ import ar.com.fernandoalvarez.api.model.Usuario;
 import ar.com.fernandoalvarez.api.service.UsuarioService;
 import ar.com.fernandoalvarez.api.specification.UsuarioSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,6 +69,15 @@ public class UsuarioControllerImpl implements UsuarioController {
     @DeleteMapping("/borrar/{id}")
     public ResponseEntity<Message> eliminarUsuario(Long id) {
         return new ResponseEntity<Message>(this.usuarioService.eliminarUsuario(id), HttpStatus.OK);
+    }
+
+    @Override
+    @GetMapping("/exportarUsuarios")
+    public ResponseEntity<Resource> exportarUsuarios(Integer dni) {
+        String filename = "ReporteUsuarios.xlsx";
+        InputStreamResource file = new InputStreamResource(this.usuarioService.findUsuarios(dni));
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(file);
     }
 
 }
