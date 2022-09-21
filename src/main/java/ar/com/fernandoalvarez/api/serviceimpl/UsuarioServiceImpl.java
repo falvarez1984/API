@@ -53,13 +53,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Message nuevo(UsuarioRequestDto usuarioRequestDto) {
-        Usuario usuario = Mapper.map(usuarioRequestDto, Usuario.class);
-        usuarioRepository.save(usuario);
-        return new Message("El usuario se creó correctamente");
-    }
-
-    @Override
     public Usuario modificarUsuario(Long id, UsuarioModificarRequestDto usuarioModificarRequestDto) {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("El plan con ID = " + id + " no existe."));
         if (usuarioModificarRequestDto.getTelefono() != null)
@@ -93,12 +86,19 @@ public class UsuarioServiceImpl implements UsuarioService {
         List<Usuario> usuarios = null;
         if (dni == null) {
             usuarios = this.usuarioRepository.findAll();
-        }else{
+        } else {
             usuarios = this.usuarioRepository.findByDni(dni);
         }
         ByteArrayInputStream in = ExcelHelper.exportarUsuarios(usuarios);
         return in;
 
+    }
+
+    @Override
+    public Message nuevo(UsuarioRequestDto usuarioRequestDto) {
+        Usuario usuario = Mapper.map(usuarioRequestDto, Usuario.class);
+        usuarioRepository.save(usuario);
+        return new Message("El usuario se creó correctamente");
     }
 
 }

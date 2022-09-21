@@ -5,12 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -46,11 +43,9 @@ public class UsuarioRequestDto {
     @NotBlank(message = "localidad no puede estar vacío")
     private String localidad;
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     @NotNull(message = "Fecha de inscripción no puede estar vacío")
-    @Temporal(TemporalType.DATE)
-    private Date fechaInscripcion;
+    private LocalDate fechaInscripcion;
 
 }

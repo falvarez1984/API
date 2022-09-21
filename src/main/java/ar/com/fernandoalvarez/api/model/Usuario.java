@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -52,12 +51,10 @@ public class Usuario implements Serializable {
     @Column(name = "LOCALIDAD")
     private String localidad;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "FECHA_NACIMIENTO")
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "FECHA_INSCRIPCION")
-    private Date fechaInscripcion;
+    private LocalDate fechaInscripcion;
 
 }

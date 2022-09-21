@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -16,6 +17,6 @@ public class UsuarioResponseDto {
     private Long id;
     private String nombre;
     private String mail;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
 }
