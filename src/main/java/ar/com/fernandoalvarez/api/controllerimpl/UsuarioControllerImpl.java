@@ -55,7 +55,7 @@ public class UsuarioControllerImpl implements UsuarioController {
     @Override
     @PostMapping("/nuevo")
     public ResponseEntity<Message> nuevoUsuario(UsuarioRequestDto usuarioRequestDto) {
-        return new ResponseEntity<Message>(this.usuarioService.nuevo(usuarioRequestDto), HttpStatus.OK);
+        return new ResponseEntity<Message>(this.usuarioService.nuevo(usuarioRequestDto), HttpStatus.CREATED);
     }
 
     @Override

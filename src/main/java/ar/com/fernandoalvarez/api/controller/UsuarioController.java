@@ -76,7 +76,7 @@ public interface UsuarioController {
 
     @Operation(summary = "Generar nuevo usuario.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "El nuevo usuario fue creado correctamente", content = @Content(schema = @Schema(implementation = Message.class))),
+            @ApiResponse(responseCode = "201", description = "El nuevo usuario fue creado correctamente", content = @Content(schema = @Schema(implementation = Message.class))),
             @ApiResponse(responseCode = "400", description = "La petición es inválida", content = @Content(schema = @Schema(implementation = ErrorDetails.class))),
             @ApiResponse(responseCode = "500", description = "Error interno al procesar la respuesta", content = @Content(schema = @Schema(implementation = ErrorDetails.class)))})
     public ResponseEntity<Message> nuevoUsuario(@Valid @RequestBody UsuarioRequestDto usuarioRequestDto);
