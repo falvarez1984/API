@@ -10,6 +10,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
 
 public class ExcelHelper {
@@ -30,6 +33,7 @@ public class ExcelHelper {
                 Cell cell = headerRow.createCell(col);
                 cell.setCellValue(HEADERs[col]);
             }
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             int rowIdx = 1;
             for (Usuario usuario : usuarios) {
                 Row row = sheet.createRow(rowIdx++);
@@ -44,8 +48,8 @@ public class ExcelHelper {
                 row.createCell(8).setCellValue(usuario.getPais());
                 row.createCell(9).setCellValue(usuario.getProvincia());
                 row.createCell(10).setCellValue(usuario.getLocalidad());
-                row.createCell(11).setCellValue(usuario.getFechaNacimiento().toString());
-                row.createCell(12).setCellValue(usuario.getFechaInscripcion().toString());
+                row.createCell(11).setCellValue(usuario.getFechaNacimiento().format(formatoFecha));
+                row.createCell(12).setCellValue(usuario.getFechaInscripcion().format(formatoFecha));
             }
             for (int i = 0; i <= sheet.getRow(0).getLastCellNum(); i++) {
                 sheet.autoSizeColumn(i);
