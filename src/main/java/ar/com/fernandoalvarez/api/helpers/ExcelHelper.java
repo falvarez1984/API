@@ -1,18 +1,13 @@
 package ar.com.fernandoalvarez.api.helpers;
 
 import ar.com.fernandoalvarez.api.model.Usuario;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
 
 public class ExcelHelper {
@@ -27,11 +22,16 @@ public class ExcelHelper {
 
         try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
             Sheet sheet = workbook.createSheet(SHEET);
+            Font font = workbook.createFont();
+            font.setBold(true);
+            CellStyle style = workbook.createCellStyle();
+            style.setFont(font);
             // Header
             Row headerRow = sheet.createRow(0);
             for (int col = 0; col < HEADERs.length; col++) {
                 Cell cell = headerRow.createCell(col);
                 cell.setCellValue(HEADERs[col]);
+                cell.setCellStyle(style);
             }
             DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             int rowIdx = 1;
