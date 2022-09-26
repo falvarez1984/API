@@ -74,10 +74,11 @@ public class UsuarioControllerImpl implements UsuarioController {
     @Override
     @GetMapping("/exportarUsuarios")
     public ResponseEntity<Resource> exportarUsuarios(Integer dni) {
-        String filename = "ReporteUsuarios.xlsx";
+        String fileName = "ReporteUsuarios.xlsx";
         InputStreamResource file = new InputStreamResource(this.usuarioService.findUsuarios(dni));
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
-                .contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(file);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=" + fileName);
+        return ResponseEntity.ok().headers(headers).contentType(MediaType.parseMediaType("application/vnd.ms-excel")).body(file);
     }
 
 }
