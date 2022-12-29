@@ -49,7 +49,7 @@ public interface UsuarioController {
             @ApiResponse(responseCode = "500", description = "Error interno al procesar la respuesta", content = @Content(schema = @Schema(implementation = ErrorDetails.class)))})
     public ResponseEntity<List<Usuario>> obtenerTodos();
 
-    @Parameters({
+    @Parameters ({
             @Parameter(name = "page", description = "Número de página (0..N).", required = true, in = ParameterIn.QUERY, schema = @Schema(type = "integer", defaultValue = "0")),
             @Parameter(name = "size", description = "Número de registros por página.", required = true, in = ParameterIn.QUERY, schema = @Schema(type = "integer", defaultValue = "10")),
             @Parameter(name = "spec", hidden = true), @Parameter(name = "pag", hidden = true),
