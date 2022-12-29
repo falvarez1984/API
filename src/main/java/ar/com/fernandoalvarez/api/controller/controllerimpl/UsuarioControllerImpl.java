@@ -1,4 +1,4 @@
-package ar.com.fernandoalvarez.api.controllerimpl;
+package ar.com.fernandoalvarez.api.controller.controllerimpl;
 
 import ar.com.fernandoalvarez.api.controller.UsuarioController;
 import ar.com.fernandoalvarez.api.dto.request.UsuarioModificarRequestDto;

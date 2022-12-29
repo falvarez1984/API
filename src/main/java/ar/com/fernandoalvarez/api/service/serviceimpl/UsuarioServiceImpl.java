@@ -1,4 +1,4 @@
-package ar.com.fernandoalvarez.api.serviceimpl;
+package ar.com.fernandoalvarez.api.service.serviceimpl;
 
 import ar.com.fernandoalvarez.api.dto.request.UsuarioModificarRequestDto;
 import ar.com.fernandoalvarez.api.dto.request.UsuarioRequestDto;
