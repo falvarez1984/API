@@ -1,4 +1,4 @@
-package ar.com.fernandoalvarez.api.serviceimpl;
+package ar.com.fernandoalvarez.api.service;
 
 import ar.com.fernandoalvarez.api.exception.ResourceNotFoundException;
 import ar.com.fernandoalvarez.api.service.UserEntityService;
